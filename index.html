@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buenas Prácticas Docentes – CEIP Bartolomé Flores</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --verde-principal:#2f6f52;
+  --verde-secundario:#3f8a67;
+  --verde-claro:#dfeee6;
+  --ocre:#c88b2d;
+  --gris-fondo:#f5f7f6;
+  --gris-borde:#cfd8d3;
+  --texto:#1f2a24;
+  --texto-muted:#5b6c63;
+  --blanco:#ffffff;
+  --rojo:#b34444;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Lato',sans-serif;background:var(--gris-fondo);color:var(--texto);min-height:100vh}
+.cabecera{background:var(--verde-principal);color:#fff}
+.cab-top{display:flex;align-items:center;gap:18px;padding:14px 30px;border-bottom:3px solid var(--ocre)}
+.cab-logo{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#fff;flex-shrink:0}
+.cab-titulo{flex:1}
+.cab-titulo h1{font-size:1.16rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;line-height:1.2}
+.cab-titulo p{font-size:.81rem;color:rgba(255,255,255,.78);margin-top:2px;letter-spacing:.05em;text-transform:uppercase}
+.cab-curso{font-size:.78rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);padding:5px 14px;border-radius:20px;white-space:nowrap}
+.contenido{max-width:980px;margin:30px auto;padding:0 20px 60px}
+.seccion-titulo{display:flex;align-items:center;gap:14px;margin-bottom:24px}
+.icono{width:46px;height:46px;border-radius:10px;background:var(--verde-principal);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;flex-shrink:0}
+.seccion-titulo h2{font-size:1.24rem;font-weight:900;color:var(--verde-principal);text-transform:uppercase;letter-spacing:.04em;line-height:1.2}
+.seccion-titulo p{font-size:.84rem;color:var(--texto-muted);margin-top:2px}
+.tabs{display:flex;gap:8px;margin-bottom:22px;flex-wrap:wrap}
+.tab-btn{background:var(--blanco);color:var(--verde-principal);border:1.5px solid var(--verde-principal);padding:11px 18px;border-radius:999px;font-weight:800;cursor:pointer}
+.tab-btn.activo{background:var(--verde-principal);color:#fff}
+.tab-panel{display:none}
+.tab-panel.activo{display:block}
+.card{background:var(--blanco);border:1px solid var(--gris-borde);border-radius:10px;padding:24px 28px;margin-bottom:22px}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:18px;padding-bottom:12px;border-bottom:2px solid var(--verde-claro)}
+.tag{background:var(--verde-principal);color:#fff;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 10px;border-radius:20px}
+.card-header h3{font-size:.95rem;font-weight:700;color:var(--verde-principal);text-transform:uppercase;letter-spacing:.05em}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+@media(max-width:700px){.grid-2,.grid-3{grid-template-columns:1fr}}
+.campo{display:flex;flex-direction:column;gap:5px}
+.campo label{font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--texto-muted)}
+.campo input,.campo select,.campo textarea{font-family:'Lato',sans-serif;font-size:.92rem;color:var(--texto);background:var(--gris-fondo);border:1px solid var(--gris-borde);border-radius:6px;padding:9px 12px;width:100%;resize:vertical}
+.campo input:focus,.campo select:focus,.campo textarea:focus{outline:none;border-color:var(--verde-secundario);box-shadow:0 0 0 3px rgba(63,138,103,.14);background:#fff}
+.campo textarea{min-height:96px}
+.campo textarea.grande{min-height:130px}
+.ayuda{font-size:.88rem;line-height:1.55;color:var(--texto-muted)}
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 18px;margin-top:8px}
+@media(max-width:700px){.check-grid{grid-template-columns:1fr}}
+.check-item{display:flex;gap:9px;align-items:flex-start}
+.acciones{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;justify-content:flex-end}
+.btn{font-family:'Lato',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;border:none;border-radius:7px;padding:11px 28px;cursor:pointer}
+.btn-primary{background:var(--verde-principal);color:#fff}
+.btn-primary:hover{background:var(--verde-secundario)}
+.btn-secondary{background:var(--blanco);color:var(--verde-principal);border:1.5px solid var(--verde-principal)}
+.btn-secondary:hover{background:var(--verde-claro)}
+.btn-ocre{background:var(--ocre);color:#fff}
+.btn-ocre:hover{background:#a7701f}
+#toast{position:fixed;bottom:24px;right:24px;background:var(--verde-principal);color:#fff;padding:12px 24px;border-radius:8px;font-size:.85rem;font-weight:700;opacity:0;transform:translateY(12px);transition:all .3s;pointer-events:none;z-index:999}
+#toast.show{opacity:1;transform:translateY(0)}
+.login-box{max-width:420px;margin:0 auto}
+.panel-resumen{display:none}
+.panel-resumen.visible{display:block}
+.respuesta-card{background:#fff;border:1px solid var(--gris-borde);border-radius:10px;padding:18px 20px;margin-bottom:16px}
+.respuesta-card h4{color:var(--verde-principal);font-size:1rem;margin-bottom:6px}
+.respuesta-meta{font-size:.83rem;color:var(--texto-muted);margin-bottom:10px}
+.respuesta-badges{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.badge{background:var(--verde-claro);color:var(--verde-principal);padding:4px 10px;border-radius:999px;font-size:.78rem;font-weight:700}
+.vacio{font-size:.95rem;color:var(--texto-muted);padding:18px 0}
+.buscador{margin-bottom:16px}
+</style>
+</head>
+<body>
+<header class="cabecera">
+  <div class="cab-top">
+    <div class="cab-logo">BF</div>
+    <div class="cab-titulo">
+      <h1>CEIP Bartolomé Flores</h1>
+      <p>Mojácar · Buenas Prácticas Docentes</p>
+    </div>
+    <span class="cab-curso">Curso 2025–2026</span>
+  </div>
+</header>
+
+<div class="contenido">
+  <div class="seccion-titulo" style="margin-top:8px;">
+    <div class="icono">&#9733;</div>
+    <div>
+      <h2>Detección y resumen de buenas prácticas</h2>
+      
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn activo" data-tab="deteccion">Detección de buenas prácticas</button>
+    <button class="tab-btn" data-tab="resumen">Resumen de buenas prácticas</button>
+  </div>
+
+  <section id="tab-deteccion" class="tab-panel activo">
+    <div class="card">
+      <div class="card-header">
+        <span class="tag">Objetivo</span>
+        <h3>Formulario breve para detectar una buena práctica</h3>
+      </div>
+      <p class="ayuda">Este formulario está pensado para que cualquier docente pueda comunicar de forma rápida una práctica que le está funcionando bien y que podría servir a otros compañeros del centro.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="tag">Identificación</span>
+        <h3>Datos básicos</h3>
+      </div>
+      <div class="grid-3" style="margin-bottom:14px;">
+        <div class="campo">
+          <label>Centro educativo</label>
+          <input type="text" value="CEIP Bartolomé Flores" id="f-centro">
+        </div>
+        <div class="campo">
+          <label>Localidad</label>
+          <input type="text" value="Mojácar" id="f-localidad">
+        </div>
+        <div class="campo">
+          <label>Curso escolar</label>
+          <input type="text" value="2025-2026" id="f-curso">
+        </div>
+      </div>
+      <div class="grid-3" style="margin-bottom:14px;">
+        <div class="campo">
+          <label>Docente / responsables</label>
+          <select id="f-docente-select">
+            <option value="">Seleccionar docente…</option>
+            <option>Alconchel Vázquez, Carlos</option>
+            <option>Alonso Ramírez, María Desamparados</option>
+            <option>Alonso Yáñez, Inmaculada</option>
+            <option>Baraza Martínez, Josefa</option>
+            <option>Barbado Márquez, Vanesa</option>
+            <option>Chacón Martín, María Dolores</option>
+            <option>Enjuto Mena, Carolina</option>
+            <option>Fernández Marcos Donate, Raquel</option>
+            <option>Flores Ortega, Juana del Pilar</option>
+            <option>García Arnau, Mireia</option>
+            <option>García Piñero, Isabel María</option>
+            <option>García Segovia, María del Saliente</option>
+            <option>Garrido Morales, Antonio Jesús</option>
+            <option>González Sanz, Nuria</option>
+            <option>Guerrero Piñero, Ana Celia</option>
+            <option>Guzmán Pérez, Rosa</option>
+            <option>Haro Mansilla, Aladina</option>
+            <option>Jimena Quesada, Luis María</option>
+            <option>Jiménez Medina, Ana Bella</option>
+            <option>Jiménez Torres, María José</option>
+            <option>Martínez Guerrero, Isabel María</option>
+            <option>Millán Cachinero, María Ángeles</option>
+            <option>Molina García, Sandra</option>
+            <option>Molina Soler, Ana Nabila</option>
+            <option>Montoya Morales, María Luisa</option>
+            <option>Moreno Alonso, Antonia</option>
+            <option>Palomares Padilla, Pilar</option>
+            <option>Paniagua Pulgarín, Teresa</option>
+            <option>Peña Ruiz, María Cruz</option>
+            <option>Ramos Muñoz, Patricia</option>
+            <option>Rodríguez Martínez, Irene</option>
+            <option>Rodríguez Montes, Jesús</option>
+            <option>Ruiz Arévalo, María</option>
+            <option>Tafur Porras, Ángela María</option>
+            <option>Torres Molina, Juan Carlos</option>
+            <option>Vedia Salinas, Carmen Cristín</option>
+            <option>Yanguez López-Cano, Rafael</option>
+          </select>
+          <input type="text" placeholder="Si no aparece, escribe el nombre manualmente" id="f-docente-manual" style="margin-top:8px;">
+        </div>
+        <div class="campo">
+          <label>Etapa / nivel</label>
+          <select id="f-etapa">
+            <option value="">Seleccionar…</option>
+            <option>Infantil</option>
+            <option>Primer ciclo</option>
+            <option>Segundo ciclo</option>
+            <option>Tercer ciclo</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label>Fecha</label>
+          <input type="date" id="f-fecha">
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="campo">
+          <label>Título de la buena práctica</label>
+          <input type="text" placeholder="Denominación breve de la actuación" id="f-titulo">
+        </div>
+        <div class="campo">
+          <label>Ámbito principal</label>
+          <select id="f-ambito">
+            <option value="">Seleccionar…</option>
+            <option>Lengua Castellana y Literatura</option>
+            <option>Matemáticas</option>
+            <option>Conocimiento del Medio Natural, Social y Cultural</option>
+            <option>Lengua Extranjera: Inglés</option>
+            <option>Educación Artística</option>
+            <option>Educación Física</option>
+            <option>Religión Católica</option>
+            <option>Atención Educativa</option>
+            <option>Valores Cívicos y Éticos</option>
+            <option>Atención a la diversidad</option>
+            <option>Competencia digital</option>
+            <option>Convivencia / tutoría</option>
+            <option>Coordinación docente</option>
+            <option>Interdisciplinar</option>
+            <option>Otros</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="tag">Síntesis</span>
+        <h3>Cuéntanos la práctica</h3>
+      </div>
+      <div class="campo" style="margin-bottom:14px;">
+        <label>¿En qué consiste?</label>
+        <textarea class="grande" id="f-descripcion" placeholder="Explícala de forma breve y clara. ¿Qué haces y con qué alumnado?"></textarea>
+      </div>
+      <div class="campo" style="margin-bottom:14px;">
+        <label>¿Qué está funcionando bien?</label>
+        <textarea id="f-funciona" placeholder="Indica qué mejora o qué resultado positivo estás observando."></textarea>
+      </div>
+      <div class="campo">
+        <label>¿Por qué crees que puede servir a otros compañeros?</label>
+        <textarea id="f-transferencia" placeholder="Explica por qué podría extrapolarse a otros niveles, áreas o docentes."></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="tag">Transferencia</span>
+        <h3>Consolidación y generalización</h3>
+      </div>
+      <div class="campo" style="margin-bottom:14px;">
+        <label>¿La práctica puede transferirse a otros cursos, ciclos o áreas del centro?</label>
+        <select id="f-transferible">
+          <option value="">Seleccionar…</option>
+          <option>Sí</option>
+          <option>No</option>
+          <option>Con ajustes</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label>¿Se considera una práctica susceptible de incorporarse como referencia de centro?</label>
+        <select id="f-referencia">
+          <option value="">Seleccionar…</option>
+          <option>Sí</option>
+          <option>No</option>
+          <option>En estudio</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="tag">Impacto</span>
+        <h3>Impacto y evidencias de mejora</h3>
+      </div>
+      <div class="campo" style="margin-bottom:14px;">
+        <label>¿Qué mejoras se han observado en el alumnado a partir de la práctica?</label>
+        <textarea id="f-mejoras" placeholder="Describe brevemente los avances observados en el alumnado."></textarea>
+      </div>
+      <div class="check-grid">
+        <label class="check-item"><input type="checkbox" value="Mejora del rendimiento" class="impacto"> <span>Mejora del rendimiento académico</span></label>
+        <label class="check-item"><input type="checkbox" value="Mayor implicación" class="impacto"> <span>Mayor implicación del alumnado</span></label>
+        <label class="check-item"><input type="checkbox" value="Inclusión" class="impacto"> <span>Inclusión y atención a la diversidad</span></label>
+        <label class="check-item"><input type="checkbox" value="Convivencia" class="impacto"> <span>Mejora de la convivencia</span></label>
+        <label class="check-item"><input type="checkbox" value="Metodologías activas" class="impacto"> <span>Uso de metodologías activas</span></label>
+        <label class="check-item"><input type="checkbox" value="Herramientas digitales" class="impacto"> <span>Uso eficaz de herramientas digitales</span></label>
+        <label class="check-item"><input type="checkbox" value="Coordinación docente" class="impacto"> <span>Fomenta la coordinación docente</span></label>
+        <label class="check-item"><input type="checkbox" value="Transferible" class="impacto"> <span>Es fácilmente transferible</span></label>
+      </div>
+      <div class="campo" style="margin-top:16px;">
+        <label>Observación final (opcional)</label>
+        <textarea id="f-observacion" placeholder="Añade cualquier detalle que consideres importante."></textarea>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <span class="tag">Valoración</span>
+        <h3>Valoración global</h3>
+      </div>
+      <div class="grid-2" style="margin-bottom:14px;">
+        <div class="campo">
+          <label>Grado global de interés como buena práctica en el centro</label>
+          <select id="f-grado">
+            <option value="">Seleccionar valoración…</option>
+            <option>Inicial – Experiencia interesante aún por consolidar</option>
+            <option>Positiva – Ha funcionado adecuadamente</option>
+            <option>Consolidada – Merece continuidad estable</option>
+            <option>Excelente – Referente para generalizar en el centro</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label>Prioridad de difusión</label>
+          <select id="f-prioridad">
+            <option value="">Seleccionar…</option>
+            <option>Alta</option>
+            <option>Media</option>
+            <option>Baja</option>
+          </select>
+        </div>
+      </div>
+      <div class="campo">
+        <label>Observaciones finales</label>
+        <textarea id="f-observaciones-finales" placeholder="Añade cualquier aclaración o propuesta final."></textarea>
+      </div>
+    </div>
+
+    <div class="acciones">
+      <button class="btn btn-secondary" onclick="limpiarFormulario()">Limpiar formulario</button>
+      <button class="btn btn-secondary" onclick="guardarLocal()">Guardar borrador</button>
+      <button class="btn btn-ocre" onclick="enviarDeteccion()">Enviar propuesta</button>
+    </div>
+  </section>
+
+  <section id="tab-resumen" class="tab-panel">
+    <div class="card login-box" id="login-admin">
+      <div class="card-header">
+        <span class="tag">Dirección</span>
+        <h3>Acceso al resumen de buenas prácticas</h3>
+      </div>
+      <p class="ayuda" style="margin-bottom:16px;">Introduce la contraseña para consultar las aportaciones recibidas.</p>
+      <div class="campo" style="margin-bottom:14px;">
+        <label>Contraseña</label>
+        <input type="password" id="admin-password" placeholder="Contraseña de dirección">
+      </div>
+      <div class="acciones" style="margin-top:0;">
+        <button class="btn btn-primary" onclick="accederResumen()">Entrar</button>
+      </div>
+    </div>
+
+    <div class="panel-resumen" id="panel-admin">
+      <div class="card">
+        <div class="card-header">
+          <span class="tag">Resumen</span>
+          <h3>Buenas prácticas registradas</h3>
+        </div>
+        <div class="campo buscador">
+          <label>Buscar</label>
+          <input type="text" id="busqueda-admin" placeholder="Busca por docente, título, etapa o ámbito" oninput="renderRegistros()">
+        </div>
+        <div class="acciones" style="margin-top:0; justify-content:flex-start;">
+          <button class="btn btn-secondary" onclick="cargarRegistros()">Actualizar</button>
+          <button class="btn btn-secondary" onclick="cerrarResumen()">Cerrar sesión</button>
+        </div>
+        <div id="contenedor-registros" style="margin-top:18px;"></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="toast">✓ Guardado correctamente</div>
+
+<script>
+const APP_SCRIPT_URL = 'PEGA_AQUI_LA_URL_DEL_WEB_APP_DE_GOOGLE_APPS_SCRIPT';
+const ADMIN_PASSWORD = 'Bartolomé Flores';
+let registrosAdmin = [];
+
+document.getElementById('f-fecha').valueAsDate = new Date();
+
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('activo'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('activo'));
+    btn.classList.add('activo');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('activo');
+  });
+});
+
+function mostrarToast(msg, esError=false){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.style.background = esError ? 'var(--rojo)' : 'var(--verde-principal)';
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3200);
+}
+
+function obtenerImpactos(){
+  return Array.from(document.querySelectorAll('.impacto:checked')).map(el=>el.value);
+}
+function obtenerDocenteSeleccionado(){
+  const manual = document.getElementById('f-docente-manual').value.trim();
+  const seleccionado = document.getElementById('f-docente-select').value.trim();
+  return manual || seleccionado;
+}
+
+
+function recogerDeteccion(){
+  return {
+    action:'submitDetection',
+    formulario:'Detección de buenas prácticas – CEIP Bartolomé Flores',
+    enviadoEn:new Date().toISOString(),
+    centro:document.getElementById('f-centro').value.trim(),
+    localidad:document.getElementById('f-localidad').value.trim(),
+    curso:document.getElementById('f-curso').value.trim(),
+    docente:obtenerDocenteSeleccionado(),
+    etapa:document.getElementById('f-etapa').value.trim(),
+    fecha:document.getElementById('f-fecha').value.trim(),
+    titulo:document.getElementById('f-titulo').value.trim(),
+    ambito:document.getElementById('f-ambito').value.trim(),
+    descripcion:document.getElementById('f-descripcion').value.trim(),
+    funciona:document.getElementById('f-funciona').value.trim(),
+    transferencia:document.getElementById('f-transferencia').value.trim(),
+    transferible:document.getElementById('f-transferible').value.trim(),
+    referenciaCentro:document.getElementById('f-referencia').value.trim(),
+    mejorasAlumnado:document.getElementById('f-mejoras').value.trim(),
+    impactos:obtenerImpactos(),
+    observacion:document.getElementById('f-observacion').value.trim(),
+    gradoInteres:document.getElementById('f-grado').value.trim(),
+    prioridadDifusion:document.getElementById('f-prioridad').value.trim(),
+    observacionesFinales:document.getElementById('f-observaciones-finales').value.trim(),
+    urlOrigen:window.location.href
+  };
+}
+
+function guardarLocal(){
+  try{
+    localStorage.setItem('bp_bf_deteccion', JSON.stringify(recogerDeteccion()));
+    mostrarToast('✓ Borrador guardado');
+  }catch(e){
+    mostrarToast('No se pudo guardar el borrador', true);
+  }
+}
+
+function limpiarFormulario(){
+  if(!confirm('¿Limpiar todos los campos?')) return;
+  document.querySelectorAll('#tab-deteccion input[type="text"], #tab-deteccion textarea').forEach(el=>el.value='');
+  document.querySelectorAll('#tab-deteccion select').forEach(el=>el.selectedIndex=0);
+  document.querySelectorAll('.impacto').forEach(el=>el.checked=false);
+  document.getElementById('f-centro').value='CEIP Bartolomé Flores';
+  document.getElementById('f-localidad').value='Mojácar';
+  document.getElementById('f-curso').value='2025-2026';
+  document.getElementById('f-fecha').valueAsDate = new Date();
+  mostrarToast('Formulario limpiado');
+}
+
+async function enviarDeteccion(){
+  if(APP_SCRIPT_URL.includes('PEGA_AQUI')){
+    mostrarToast('Falta pegar la URL del Web App de Google Apps Script.', true);
+    return;
+  }
+  const payload = recogerDeteccion();
+  if(!payload.docente || !payload.titulo || !payload.descripcion){
+    mostrarToast('Completa al menos docente, título y descripción.', true);
+    return;
+  }
+  const boton = document.querySelector('#tab-deteccion .btn-ocre');
+  const original = boton.innerHTML;
+  boton.disabled = true; boton.style.opacity = '.7'; boton.innerHTML='Enviando...';
+  try{
+    const respuesta = await fetch(APP_SCRIPT_URL,{
+      method:'POST',
+      mode:'cors',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body: JSON.stringify(payload)
+    });
+    const data = await respuesta.json().catch(()=>({}));
+    if(!respuesta.ok || data.result !== 'success') throw new Error(data.message || 'No se pudo enviar.');
+    localStorage.setItem('bp_bf_deteccion', JSON.stringify(payload));
+    mostrarToast('✓ Propuesta registrada correctamente');
+  }catch(error){
+    console.error(error);
+    mostrarToast('Error al registrar la propuesta. Revisa el script.', true);
+  }finally{
+    boton.disabled = false; boton.style.opacity='1'; boton.innerHTML=original;
+  }
+}
+
+function accederResumen(){
+  const pwd = document.getElementById('admin-password').value;
+  if(pwd !== ADMIN_PASSWORD){
+    mostrarToast('Contraseña incorrecta', true);
+    return;
+  }
+  document.getElementById('login-admin').style.display='none';
+  document.getElementById('panel-admin').classList.add('visible');
+  cargarRegistros();
+}
+
+function cerrarResumen(){
+  document.getElementById('admin-password').value='';
+  document.getElementById('login-admin').style.display='block';
+  document.getElementById('panel-admin').classList.remove('visible');
+}
+
+async function cargarRegistros(){
+  if(APP_SCRIPT_URL.includes('PEGA_AQUI')){
+    mostrarToast('Falta pegar la URL del Web App de Google Apps Script.', true);
+    return;
+  }
+  const cont = document.getElementById('contenedor-registros');
+  cont.innerHTML = '<p class="vacio">Cargando registros...</p>';
+  try{
+    const url = APP_SCRIPT_URL + '?action=listDetections';
+    const resp = await fetch(url, {method:'GET', mode:'cors'});
+    const data = await resp.json();
+    if(data.result !== 'success') throw new Error(data.message || 'No se pudieron cargar.');
+    registrosAdmin = data.records || [];
+    renderRegistros();
+  }catch(error){
+    console.error(error);
+    cont.innerHTML = '<p class="vacio">No se han podido cargar los registros.</p>';
+  }
+}
+
+function renderRegistros(){
+  const cont = document.getElementById('contenedor-registros');
+  const q = (document.getElementById('busqueda-admin').value || '').toLowerCase().trim();
+  let regs = registrosAdmin.slice();
+  if(q){
+    regs = regs.filter(r =>
+      [r.docente, r.titulo, r.etapa, r.ambito, r.descripcion, r.mejorasAlumnado, r.transferencia, r.transferible, r.referenciaCentro, r.gradoInteres, r.prioridadDifusion, (r.impactos||[]).join(' ')]
+      .join(' ').toLowerCase().includes(q)
+    );
+  }
+  if(!regs.length){
+    cont.innerHTML = '<p class="vacio">No hay prácticas registradas con ese criterio.</p>';
+    return;
+  }
+  cont.innerHTML = regs.map(r => `
+    <article class="respuesta-card">
+      <h4>${esc(r.titulo || 'Sin título')}</h4>
+      <div class="respuesta-meta">
+        <strong>${esc(r.docente || 'Sin autoría')}</strong> · ${esc(r.etapa || 'Sin etapa')} · ${esc(r.ambito || 'Sin ámbito')} · ${esc(formatearFecha(r.fecha || r.enviadoEn))}
+      </div>
+      <p><strong>Descripción:</strong> ${esc(r.descripcion || '')}</p>
+      <p style="margin-top:8px;"><strong>Qué está funcionando bien:</strong> ${esc(r.funciona || '')}</p>
+      ${r.mejorasAlumnado ? `<p style="margin-top:8px;"><strong>Mejoras observadas en el alumnado:</strong> ${esc(r.mejorasAlumnado)}</p>` : ''}
+      <p style="margin-top:8px;"><strong>Posibilidad de transferencia:</strong> ${esc(r.transferencia || '')}</p>
+      ${r.transferible ? `<p style="margin-top:8px;"><strong>Transferible a otros cursos, ciclos o áreas:</strong> ${esc(r.transferible)}</p>` : ''}
+      ${r.referenciaCentro ? `<p style="margin-top:8px;"><strong>Referencia de centro:</strong> ${esc(r.referenciaCentro)}</p>` : ''}
+      ${(r.impactos && r.impactos.length) ? `<div class="respuesta-badges">${r.impactos.map(i=>`<span class="badge">${esc(i)}</span>`).join('')}</div>` : ''}
+      ${(r.gradoInteres || r.prioridadDifusion) ? `<p style="margin-top:8px;"><strong>Valoración:</strong> ${esc(r.gradoInteres || '')}${r.gradoInteres && r.prioridadDifusion ? ' · ' : ''}${r.prioridadDifusion ? 'Prioridad ' + esc(r.prioridadDifusion) : ''}</p>` : ''}
+      ${r.observacion ? `<p style="margin-top:8px;"><strong>Observación final:</strong> ${esc(r.observacion)}</p>` : ''}
+      ${r.observacionesFinales ? `<p style="margin-top:8px;"><strong>Observaciones finales:</strong> ${esc(r.observacionesFinales)}</p>` : ''}
+    </article>
+  `).join('');
+}
+
+function esc(txt){
+  return String(txt || '').replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+}
+function formatearFecha(v){
+  if(!v) return '';
+  const d = new Date(v);
+  if(isNaN(d)) return v;
+  return d.toLocaleString('es-ES');
+}
+
+try{
+  const saved = localStorage.getItem('bp_bf_deteccion');
+  if(saved){
+    const d = JSON.parse(saved);
+    if(d.docente){
+      const docenteSelect = document.getElementById('f-docente-select');
+      const opciones = Array.from(docenteSelect.options).map(o=>o.value);
+      if(opciones.includes(d.docente)) docenteSelect.value = d.docente || '';
+      else document.getElementById('f-docente-manual').value = d.docente || '';
+    }
+    if(d.etapa) document.getElementById('f-etapa').value = d.etapa || '';
+    if(d.fecha) document.getElementById('f-fecha').value = d.fecha || '';
+    if(d.titulo) document.getElementById('f-titulo').value = d.titulo || '';
+    if(d.ambito) document.getElementById('f-ambito').value = d.ambito || '';
+    if(d.descripcion) document.getElementById('f-descripcion').value = d.descripcion || '';
+    if(d.funciona) document.getElementById('f-funciona').value = d.funciona || '';
+    if(d.transferencia) document.getElementById('f-transferencia').value = d.transferencia || '';
+    if(d.transferible) document.getElementById('f-transferible').value = d.transferible || '';
+    if(d.referenciaCentro) document.getElementById('f-referencia').value = d.referenciaCentro || '';
+    if(d.mejorasAlumnado) document.getElementById('f-mejoras').value = d.mejorasAlumnado || '';
+    if(d.observacion) document.getElementById('f-observacion').value = d.observacion || '';
+    if(d.gradoInteres) document.getElementById('f-grado').value = d.gradoInteres || '';
+    if(d.prioridadDifusion) document.getElementById('f-prioridad').value = d.prioridadDifusion || '';
+    if(d.observacionesFinales) document.getElementById('f-observaciones-finales').value = d.observacionesFinales || '';
+    (d.impactos || []).forEach(val=>{
+      const box = Array.from(document.querySelectorAll('.impacto')).find(x=>x.value===val);
+      if(box) box.checked = true;
+    });
+  }
+}catch(e){}
+</script>
+</body>
+</html>
