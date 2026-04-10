@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario de Buenas Prácticas Docentes – CEIP Bartolomé Flores</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde-principal: #2f6f52;
+    --verde-secundario: #3f8a67;
+    --verde-claro: #dfeee6;
+    --ocre: #c88b2d;
+    --ocre-claro: #f4e6cf;
+    --gris-fondo: #f5f7f6;
+    --gris-borde: #cfd8d3;
+    --texto: #1f2a24;
+    --texto-muted: #5b6c63;
+    --blanco: #ffffff;
+    --burdeos: #7c3f3f;
+    --azul: #2c5b7a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--gris-fondo);
+    color: var(--texto);
+    min-height: 100vh;
+  }
+  .cabecera { background: var(--verde-principal); color: #fff; }
+  .cab-top {
+    display: flex; align-items: center; gap: 18px;
+    padding: 14px 30px; border-bottom: 3px solid var(--ocre);
+  }
+  .cab-logo {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(255,255,255,0.16);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 900; color: #fff; flex-shrink: 0;
+  }
+  .cab-titulo { flex: 1; }
+  .cab-titulo h1 {
+    font-size: 1.16rem; font-weight: 900; letter-spacing: .04em;
+    text-transform: uppercase; line-height: 1.2;
+  }
+  .cab-titulo p {
+    font-size: .81rem; color: rgba(255,255,255,.78); margin-top: 2px;
+    letter-spacing: .05em; text-transform: uppercase;
+  }
+  .cab-curso {
+    font-size: .78rem; background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.24); padding: 5px 14px;
+    border-radius: 20px; white-space: nowrap;
+  }
+  .cab-nav {
+    background: var(--verde-secundario); display: flex; gap: 4px;
+    padding: 0 26px; overflow-x: auto;
+  }
+  .cab-nav a {
+    color: rgba(255,255,255,.82); text-decoration: none; font-size: .78rem;
+    font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+    padding: 10px 14px; border-bottom: 3px solid transparent; white-space: nowrap;
+  }
+  .cab-nav a:hover, .cab-nav a.activo { color: #fff; border-bottom-color: #f1d6a4; }
+  .contenido { max-width: 980px; margin: 30px auto; padding: 0 20px 60px; }
+  .seccion-titulo {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 24px;
+  }
+  .icono {
+    width: 46px; height: 46px; border-radius: 10px; background: var(--verde-principal);
+    display: flex; align-items: center; justify-content: center; color: #fff;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .seccion-titulo h2 {
+    font-size: 1.24rem; font-weight: 900; color: var(--verde-principal);
+    text-transform: uppercase; letter-spacing: .04em; line-height: 1.2;
+  }
+  .seccion-titulo p { font-size: .84rem; color: var(--texto-muted); margin-top: 2px; }
+  .card {
+    background: var(--blanco); border: 1px solid var(--gris-borde); border-radius: 10px;
+    padding: 24px 28px; margin-bottom: 22px;
+  }
+  .card-header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 18px;
+    padding-bottom: 12px; border-bottom: 2px solid var(--verde-claro);
+  }
+  .tag {
+    background: var(--verde-principal); color: #fff; font-size: .7rem; font-weight: 700;
+    letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px;
+  }
+  .card-header h3 {
+    font-size: .95rem; font-weight: 700; color: var(--verde-principal);
+    text-transform: uppercase; letter-spacing: .05em;
+  }
+  .nota-objetivo {
+    background: linear-gradient(90deg, var(--ocre-claro), #fff7ea);
+    border: 1px solid #e2c897; border-left: 6px solid var(--ocre);
+    border-radius: 10px; padding: 18px 20px; margin-bottom: 22px;
+  }
+  .nota-objetivo h3 {
+    color: #8a5b12; font-size: .92rem; font-weight: 900; text-transform: uppercase;
+    letter-spacing: .05em; margin-bottom: 8px;
+  }
+  .nota-objetivo p { font-size: .94rem; line-height: 1.55; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  @media(max-width:700px){ .grid-2,.grid-3 { grid-template-columns: 1fr; } }
+  .campo { display: flex; flex-direction: column; gap: 5px; }
+  .campo label {
+    font-size: .72rem; font-weight: 700; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--texto-muted);
+  }
+  .campo input, .campo select, .campo textarea {
+    font-family: 'Lato', sans-serif; font-size: .92rem; color: var(--texto);
+    background: var(--gris-fondo); border: 1px solid var(--gris-borde);
+    border-radius: 6px; padding: 9px 12px; width: 100%; resize: vertical;
+    transition: border-color .18s, box-shadow .18s;
+  }
+  .campo input:focus, .campo select:focus, .campo textarea:focus {
+    outline: none; border-color: var(--verde-secundario);
+    box-shadow: 0 0 0 3px rgba(63,138,103,.14); background: #fff;
+  }
+  .campo textarea { min-height: 102px; }
+  .campo textarea.grande { min-height: 132px; }
+  .progreso-wrap {
+    background: var(--blanco); border: 1px solid var(--gris-borde); border-radius: 10px;
+    padding: 16px 24px; margin-bottom: 22px; display: flex; align-items: center; gap: 20px;
+  }
+  .progreso-label {
+    font-size: .78rem; font-weight: 700; color: var(--texto-muted); text-transform: uppercase;
+    letter-spacing: .06em; white-space: nowrap;
+  }
+  .barra-ext { flex: 1; background: var(--gris-borde); border-radius: 20px; height: 8px; overflow: hidden; }
+  .barra-int { background: var(--verde-principal); height: 100%; border-radius: 20px; transition: width .4s ease; width: 0%; }
+  .progreso-pct { font-size: .9rem; font-weight: 900; color: var(--verde-principal); min-width: 40px; text-align: right; }
+  .dimension-bloque {
+    margin-bottom: 22px; border-radius: 10px; overflow: hidden; border: 1px solid var(--gris-borde);
+  }
+  .dimension-cab {
+    display: flex; align-items: center; gap: 14px; padding: 13px 20px; cursor: pointer; user-select: none;
+  }
+  .dim-numero {
+    width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: .85rem; font-weight: 900; flex-shrink: 0;
+  }
+  .dimension-cab h4 {
+    font-size: .88rem; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; flex: 1; line-height: 1.25;
+  }
+  .flecha { font-size: .8rem; transition: transform .25s; opacity: .78; }
+  .dimension-bloque.cerrado .flecha { transform: rotate(-90deg); }
+  .dimension-body { background: var(--blanco); padding: 0 20px 20px; display: flex; flex-direction: column; gap: 18px; }
+  .dimension-bloque.cerrado .dimension-body { display: none; }
+  .pregunta { border-left: 3px solid var(--gris-borde); padding-left: 14px; }
+  .pregunta label.preg-label {
+    display: block; font-size: .86rem; font-weight: 700; color: var(--texto);
+    margin-bottom: 7px; line-height: 1.45;
+  }
+  .pregunta label.preg-label span.num { font-weight: 900; color: var(--verde-secundario); margin-right: 4px; }
+  .yn-group { display: flex; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+  .yn-btn {
+    padding: 5px 18px; font-family: 'Lato', sans-serif; font-size: .78rem; font-weight: 700;
+    letter-spacing: .05em; text-transform: uppercase; border: 1.5px solid var(--gris-borde);
+    border-radius: 20px; background: var(--gris-fondo); color: var(--texto-muted); cursor: pointer;
+  }
+  .yn-btn:hover { border-color: var(--verde-secundario); color: var(--verde-secundario); }
+  .yn-btn.si-sel { background: var(--verde-principal); border-color: var(--verde-principal); color: #fff; }
+  .yn-btn.no-sel { background: #b34444; border-color: #b34444; color: #fff; }
+  .dim1 .dimension-cab { background: var(--verde-principal); color: #fff; }
+  .dim1 .dim-numero, .dim2 .dim-numero, .dim3 .dim-numero, .dim4 .dim-numero, .dim5 .dim-numero, .dim6 .dim-numero {
+    background: rgba(255,255,255,.18); color: #fff;
+  }
+  .dim2 .dimension-cab { background: var(--azul); color:#fff; }
+  .dim3 .dimension-cab { background: var(--ocre); color:#fff; }
+  .dim4 .dimension-cab { background: #6a4b86; color:#fff; }
+  .dim5 .dimension-cab { background: #7c3f3f; color:#fff; }
+  .dim6 .dimension-cab { background: #426b4d; color:#fff; }
+  .dim1 .pregunta { border-color: var(--verde-secundario); }
+  .dim2 .pregunta { border-color: var(--azul); }
+  .dim3 .pregunta { border-color: var(--ocre); }
+  .dim4 .pregunta { border-color: #6a4b86; }
+  .dim5 .pregunta { border-color: #7c3f3f; }
+  .dim6 .pregunta { border-color: #426b4d; }
+  .acciones { display: flex; gap: 14px; margin-top: 30px; flex-wrap: wrap; justify-content: flex-end; }
+  .btn {
+    font-family: 'Lato', sans-serif; font-size: .82rem; font-weight: 700; letter-spacing: .07em;
+    text-transform: uppercase; border: none; border-radius: 7px; padding: 11px 28px; cursor: pointer;
+  }
+  .btn-primary { background: var(--verde-principal); color: #fff; }
+  .btn-primary:hover { background: var(--verde-secundario); }
+  .btn-secondary { background: var(--blanco); color: var(--verde-principal); border: 1.5px solid var(--verde-principal); }
+  .btn-secondary:hover { background: var(--verde-claro); }
+  .btn-ocre { background: var(--ocre); color: #fff; }
+  .btn-ocre:hover { background: #a7701f; }
+  #toast {
+    position: fixed; bottom: 24px; right: 24px; background: var(--verde-principal); color: #fff;
+    padding: 12px 24px; border-radius: 8px; font-size: .85rem; font-weight: 700;
+    opacity: 0; transform: translateY(12px); transition: all .3s; pointer-events: none; z-index: 999;
+  }
+  #toast.show { opacity: 1; transform: translateY(0); }
+  @media print {
+    body { background: #fff; }
+    .cab-nav, .acciones, .progreso-wrap { display: none; }
+    .contenido { max-width: 100%; padding: 0; margin: 0; }
+    .dimension-bloque.cerrado .dimension-body { display: flex !important; }
+    .dimension-cab { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .yn-btn.si-sel { background: var(--verde-principal) !important; -webkit-print-color-adjust: exact; }
+    .yn-btn.no-sel { background: #b34444 !important; -webkit-print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+<header class="cabecera">
+  <div class="cab-top">
+    <div class="cab-logo">BF</div>
+    <div class="cab-titulo">
+      <h1>CEIP Bartolomé Flores</h1>
+      <p>Mojácar · Formulario de Buenas Prácticas Docentes</p>
+    </div>
+    <span class="cab-curso">Curso 2025–2026</span>
+  </div>
+  <nav class="cab-nav">
+    <a href="#" class="activo">Formulario</a>
+    <a href="#" onclick="window.print();return false;">Imprimir</a>
+    <a href="#" onclick="guardarLocal();return false;">Guardar</a>
+    <a href="#" onclick="limpiarTodo();return false;">Limpiar</a>
+  </nav>
+</header>
+
+<div class="contenido">
+  <div class="seccion-titulo" style="margin-top:8px;">
+    <div class="icono">&#9733;</div>
+    <div>
+      <h2>Registro de Buenas Prácticas Docentes</h2>
+      <p>Redes de colaboración, aprendizaje continuo e impacto en la mejora del alumnado</p>
+    </div>
+  </div>
+
+  <div class="nota-objetivo">
+    <h3>Vinculación con el Proyecto de Dirección</h3>
+    <p><strong>Objetivo n.º 2:</strong> Establecer redes de colaboración y aprendizaje continuo entre el profesorado, identificando, consolidando y generalizando prácticas exitosas que incidan en la mejora de los resultados académicos de los estudiantes.</p>
+  </div>
+
+  <div class="progreso-wrap">
+    <span class="progreso-label">Completado</span>
+    <div class="barra-ext"><div class="barra-int" id="barra"></div></div>
+    <span class="progreso-pct" id="pct-txt">0 %</span>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <span class="tag">Identificación</span>
+      <h3>Datos del centro y de la práctica</h3>
+    </div>
+    <div class="grid-3" style="margin-bottom:14px;">
+      <div class="campo">
+        <label>Centro educativo</label>
+        <input type="text" value="CEIP Bartolomé Flores">
+      </div>
+      <div class="campo">
+        <label>Localidad</label>
+        <input type="text" value="Mojácar">
+      </div>
+      <div class="campo">
+        <label>Curso escolar</label>
+        <input type="text" value="2025-2026">
+      </div>
+    </div>
+    <div class="grid-3" style="margin-bottom:14px;">
+      <div class="campo">
+        <label>Docente / responsables</label>
+        <input type="text" placeholder="Selecciona o escribe nombre y apellidos" list="lista-docentes">
+        <datalist id="lista-docentes">
+          <option value="Alconchel Vázquez, Carlos">
+          <option value="Alonso Ramírez, María Desamparados">
+          <option value="Alonso Yáñez, Inmaculada">
+          <option value="Baraza Martínez, Josefa">
+          <option value="Barbado Márquez, Vanesa">
+          <option value="Chacón Martín, María Dolores">
+          <option value="Enjuto Mena, Carolina">
+          <option value="Fernández Marcos Donate, Raquel">
+          <option value="Flores Ortega, Juana del Pilar">
+          <option value="García Arnau, Mireia">
+          <option value="García Piñero, Isabel María">
+          <option value="García Segovia, María del Saliente">
+          <option value="Garrido Morales, Antonio Jesús">
+          <option value="González Sanz, Nuria">
+          <option value="Guerrero Piñero, Ana Celia">
+          <option value="Guzmán Pérez, Rosa">
+          <option value="Haro Mansilla, Aladina">
+          <option value="Jimena Quesada, Luis María">
+          <option value="Jiménez Medina, Ana Bella">
+          <option value="Jiménez Torres, María José">
+          <option value="Martínez Guerrero, Isabel María">
+          <option value="Millán Cachinero, María Ángeles">
+          <option value="Molina García, Sandra">
+          <option value="Molina Soler, Ana Nabila">
+          <option value="Montoya Morales, María Luisa">
+          <option value="Moreno Alonso, Antonia">
+          <option value="Palomares Padilla, Pilar">
+          <option value="Paniagua Pulgarín, Teresa">
+          <option value="Peña Ruiz, María Cruz">
+          <option value="Ramos Muñoz, Patricia">
+          <option value="Rodríguez Martínez, Irene">
+          <option value="Rodríguez Montes, Jesús">
+          <option value="Ruiz Arévalo, María">
+          <option value="Tafur Porras, Ángela María">
+          <option value="Torres Molina, Juan Carlos">
+          <option value="Vedia Salinas, Carmen Cristín">
+          <option value="Yanguez López-Cano, Rafael">
+        </datalist>
+      </div>
+      <div class="campo">
+        <label>Etapa / nivel</label>
+        <select>
+          <option value="">Seleccionar…</option>
+          <option>Infantil</option>
+          <option>Primer ciclo</option>
+          <option>Segundo ciclo</option>
+          <option>Tercer ciclo</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label>Fecha</label>
+        <input type="date" id="d-fecha">
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="campo">
+        <label>Título de la buena práctica</label>
+        <input type="text" placeholder="Denominación breve de la actuación">
+      </div>
+      <div class="campo">
+        <label>Ámbito principal</label>
+        <select>
+          <option value="">Seleccionar…</option>
+          <option>Coordinación docente</option>
+          <option>Metodologías activas</option>
+          <option>Lengua</option>
+          <option>Matemáticas</option>
+          <option>Atención a la diversidad</option>
+          <option>Competencia digital</option>
+          <option>Convivencia / tutoría</option>
+          <option>Interdisciplinar</option>
+          <option>Otros</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="dimension-bloque dim1" id="dim1">
+    <div class="dimension-cab" onclick="toggle('dim1')">
+      <div class="dim-numero">1</div>
+      <h4>Descripción y sentido pedagógico de la práctica</h4>
+      <span class="flecha">&#9660;</span>
+    </div>
+    <div class="dimension-body">
+      <div class="pregunta" style="margin-top:6px;">
+        <label class="preg-label"><span class="num">1.1</span> Describe brevemente en qué consiste la práctica docente y qué necesidad del centro pretende atender.</label>
+        <div class="campo"><textarea class="grande" placeholder="Explica la actuación, el contexto en el que surge y la necesidad detectada."></textarea></div>
+      </div>
+      <div class="pregunta">
+        <label class="preg-label"><span class="num">1.2</span> ¿La práctica está alineada con la mejora de los resultados del alumnado y con el Objetivo 2 del Proyecto de Dirección?</label>
+        <div class="yn-group">
+          <button class="yn-btn" onclick="selYN(this,'si')">Sí</button>
+          <button class="yn-btn" onclick="selYN(this,'no')">No</button>
+          <button class="yn-btn" onclick="selYN(this,'parcial')">Parcialmente</button>
+        </div>
+        <div class="campo"><textarea placeholder="Indica de qué manera contribuye a identificar, consolidar o generalizar prácticas exitosas."></textarea></div>
+      </div>
+      <div class="pregunta">
+        <label class="preg-label"><span class="num">1.3</span> ¿Qué áreas, competencias o aprendizajes mejora especialmente esta práctica?</label>
+        <div class="campo"><textarea placeholder="Ej. comprensión lectora, resolución de problemas, expresión escrita, autonomía, trabajo cooperativo, competencia digital…"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dimension-bloque dim2" id="dim2">
+    <div class="dimension-cab" onclick="toggle('dim2')">
+      <div class="dim-numero">2</div>
+      <h4>Colaboración docente y aprendizaje compartido</h4>
+      <span class="flecha">&#9660;</span>
+    </div>
+    <div class="dimension-body">
+      <div class="pregunta" style="margin-top:6px;">
+        <label class="preg-label"><span class="num">2.1</span> ¿Cómo se ha compartido, coordinado o diseñado esta práctica entre docentes?</label>
+        <div class="campo"><textarea class="grande" placeholder="Describe reuniones, equipos implicados, ciclo, ETCP, coordinación internivel, trabajo por áreas, etc."></textarea></div>
+      </div>
+      <div class="pregunta">
+        <label class="preg-label"><span class="num">2.2</span> ¿Ha generado intercambio de materiales, observación entre iguales o reflexión conjunta sobre la práctica?</label>
+        <div class="yn-group">
+          <button class="yn-btn" onclick="selYN(this,'si')">Sí</button>
+          <button class="yn-btn" onclick="selYN(this,'no')">No</button>
+          <button class="yn-btn" onclick="selYN(this,'parcial')">En parte</button>
+        </div>
+        <div class="campo"><textarea placeholder="Concreta qué tipo de intercambio o aprendizaje profesional ha producido."></textarea></div>
+      </div>
+      <div class="pregunta">
+        <label class="preg-label"><span class="num">2.3</span> ¿Qué necesidades formativas del profesorado se han detectado o atendido a partir de esta experiencia?</label>
+        <div class="campo"><textarea placeholder="Indica si la práctica ha revelado necesidades de formación o ha impulsado aprendizaje continuo del profesorado."></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dimension-bloque dim3" id="dim3">
+    <div class="dimension-cab" onclick="toggle('dim3')">
+      <div class="dim-numero">3</div>
+      <h4>Aplicación en el aula e inclusión</h4>
+      <span class="flecha">&#9660;</span>
+    </div>
+    <div class="dimension-body">
+      <div class="pregunta" style="margin-top:6px;">
+        <label class="preg-label"><span class="num">3.1</span> ¿Cómo se desarrolla la práctica con el alumnado? Explica metodología, agrupamientos, recursos y temporalización.</label>
+        <div class="campo"><textarea class="grande" placeholder="Describe cómo se lleva al aula la práctica: rutinas, sesiones, materiales, espacios, apoyos…"></textarea></div>
+      </div>
+      <div class="pregunta">
+        <label class="preg-label"><span class="num">3.2</span> ¿Favorece la participación de todo el alumnado y la atención a la diversidad?</label>
+        <div class="yn-group">
+          <button class="yn-btn" onclick="selYN(this,'si')">Sí</button>
+          <button class="yn-btn" onclick="selYN(this,'no')">No</button>
+          <button class="yn-btn" onclick="selYN(this,'parcial')">Parcialmente</button>
+        </div>
+        <div class="campo"><textarea placeholder="Indica ajustes, apoyos, medidas inclusivas o adaptaciones aplicadas."></textarea></div>
+      </div>
+      <div class="pregunta">
+        <label class="preg-label"><span class="num">3.3</span> ¿Qué elementos de innovación, metodología activa o trabajo competencial incorpora?</label>
+        <div class="campo"><textarea placeholder="Ej. ABP, aprendizaje cooperativo, situaciones de aprendizaje, evaluación formativa, TIC, gamificación…"></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dimension-bloque dim4" id="dim4">
+    <div class="dimension-cab" onclick="toggle('dim4')">
+      <div class="dim-numero">4</div>
+      <h4>Impacto y evidencias de mejora</h4>
+      <span class="flecha">&#9660;</span>
+    </div>
+    <div class="dimension-body">
+      <div class="pregunta" style="margin-top:6px;">
+        <label class="preg-label"><span class="num">4.1</span> ¿Qué mejoras se han observado en el alumnado a partir de esta práctica?</label>
+        <div class="campo"><textarea class="grande" placeholder="Describe avances académicos, motivación, autonomía, participación, convivencia o rendimiento."></textarea></div>
+      </div>
+      <div class="pregunta">
+        <label class="preg-label"><span class="num">4.2</span> ¿Qué evidencias objetivas o registros sostienen la valoración positiva de la práctica?</label>
+        <div class="campo"><textarea placeholder="Ej. resultados de evaluación, rúbricas, cuadernos, productos finales, actas, observaciones, comparativas, cuestionarios…"></textarea></div>
+      </div>
+      <div class="pregunta">
+        <label class="preg-label"><span class="num">4.3</span> ¿Se ha valorado la práctica en órganos de coordinación docente o reuniones del centro?</label>
+        <div class="yn-group">
+          <button class="yn-btn" onclick="selYN(this,'si')">Sí</button>
+          <button class="yn-btn" onclick="selYN(this,'no')">No</button>
+          <button class="yn-btn" onclick="selYN(this,'parcial')">Pendiente</button>
+        </div>
+        <div class="campo"><textarea placeholder="Indica dónde se ha analizado: equipo de ciclo, ETCP, Claustro, etc."></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dimension-bloque dim5" id="dim5">
+    <div class="dimension-cab" onclick="toggle('dim5')">
+      <div class="dim-numero">5</div>
+      <h4>Transferencia, consolidación y generalización</h4>
+      <span class="flecha">&#9660;</span>
+    </div>
+    <div class="dimension-body">
+      <div class="pregunta" style="margin-top:6px;">
+        <label class="preg-label"><span class="num">5.1</span> ¿La práctica puede transferirse a otros cursos, ciclos o áreas del centro?</label>
+        <div class="yn-group">
+          <button class="yn-btn" onclick="selYN(this,'si')">Sí</button>
+          <button class="yn-btn" onclick="selYN(this,'no')">No</button>
+          <button class="yn-btn" onclick="selYN(this,'parcial')">Con ajustes</button>
+        </div>
+        <div class="campo"><textarea class="grande" placeholder="Explica en qué condiciones podría generalizarse o ampliarse a otros contextos."></textarea></div>
+      </div>
+      <div class="pregunta">
+        <label class="preg-label"><span class="num">5.2</span> ¿Qué elementos deberían consolidarse para que esta actuación se mantenga en el tiempo?</label>
+        <div class="campo"><textarea placeholder="Recursos, tiempos de coordinación, formación, materiales comunes, acuerdos metodológicos, etc."></textarea></div>
+      </div>
+      <div class="pregunta">
+        <label class="preg-label"><span class="num">5.3</span> ¿Se considera una práctica susceptible de incorporarse como referencia de centro?</label>
+        <div class="yn-group">
+          <button class="yn-btn" onclick="selYN(this,'si')">Sí</button>
+          <button class="yn-btn" onclick="selYN(this,'no')">No</button>
+          <button class="yn-btn" onclick="selYN(this,'parcial')">En estudio</button>
+        </div>
+        <div class="campo"><textarea placeholder="Razona la respuesta e indica cómo podría difundirse dentro del colegio."></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dimension-bloque dim6" id="dim6">
+    <div class="dimension-cab" onclick="toggle('dim6')">
+      <div class="dim-numero">6</div>
+      <h4>Valoración final y propuestas de continuidad</h4>
+      <span class="flecha">&#9660;</span>
+    </div>
+    <div class="dimension-body">
+      <div class="pregunta" style="margin-top:6px;">
+        <label class="preg-label"><span class="num">6.1</span> Fortalezas principales de la práctica docente.</label>
+        <div class="campo"><textarea class="grande" placeholder="Resume los aspectos mejor valorados de la experiencia."></textarea></div>
+      </div>
+      <div class="pregunta">
+        <label class="preg-label"><span class="num">6.2</span> Dificultades encontradas y aspectos a mejorar.</label>
+        <div class="campo"><textarea placeholder="Indica obstáculos, limitaciones y necesidades detectadas."></textarea></div>
+      </div>
+      <div class="pregunta">
+        <label class="preg-label"><span class="num">6.3</span> Propuesta de continuidad para el próximo curso.</label>
+        <div class="campo"><textarea placeholder="Especifica cómo se mantendría, ampliaría o revisaría la práctica."></textarea></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:22px;">
+    <div class="card-header">
+      <span class="tag">Síntesis</span>
+      <h3>Valoración global</h3>
+    </div>
+    <div class="grid-2" style="margin-bottom:14px;">
+      <div class="campo">
+        <label>Grado global de interés como buena práctica de centro</label>
+        <select>
+          <option value="">Seleccionar valoración…</option>
+          <option>Inicial – Experiencia interesante aún por consolidar</option>
+          <option>Positiva – Ha funcionado adecuadamente</option>
+          <option>Consolidada – Merece continuidad estable</option>
+          <option>Excelente – Referente para generalizar en el centro</option>
+        </select>
+      </div>
+      <div class="campo">
+        <label>Prioridad de difusión interna</label>
+        <select>
+          <option value="">Seleccionar…</option>
+          <option>Alta</option>
+          <option>Media</option>
+          <option>Baja</option>
+        </select>
+      </div>
+    </div>
+    <div class="campo">
+      <label>Observaciones finales</label>
+      <textarea class="grande" placeholder="Añade cualquier aclaración, acuerdo de centro o propuesta adicional."></textarea>
+    </div>
+  </div>
+
+
+  <div class="card" style="margin-top:22px;">
+    <div class="card-header">
+      <span class="tag">Archivo</span>
+      <h3>Registro automático en base de datos</h3>
+    </div>
+    <p style="font-size:.92rem; line-height:1.55; color:var(--texto-muted);">Este formulario puede guardar cada envío en una hoja de cálculo de Google. Para activarlo, pega en el código la URL del Web App de Google Apps Script que te adjunto junto a este archivo.</p>
+  </div>
+
+  <div class="acciones">
+    <button class="btn btn-secondary" onclick="limpiarTodo()">Limpiar formulario</button>
+    <button class="btn btn-secondary" onclick="guardarLocal()">Guardar borrador</button>
+    <button class="btn btn-primary" onclick="window.print()">Imprimir / PDF</button>
+    <button class="btn btn-ocre" onclick="enviarFormulario()">Registrar ficha &#10003;</button>
+  </div>
+</div>
+
+<div id="toast">✓ Guardado correctamente</div>
+
+
+<script>
+  const APP_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwxHr8p5EyfoLmmulwP9LXf5FYYQ55bLN83iRcf37pJg2kugG5aUkdVW3Z_4S7_sNXHaA/exec';
+
+  document.getElementById('d-fecha').valueAsDate = new Date();
+
+  function toggle(id){
+    const el=document.getElementById(id);
+    el.classList.toggle('cerrado');
+    actualizarProgreso();
+  }
+
+  function selYN(btn,tipo){
+    const grupo=btn.closest('.yn-group');
+    grupo.querySelectorAll('.yn-btn').forEach(b=>b.classList.remove('si-sel','no-sel'));
+    if(tipo==='si') btn.classList.add('si-sel');
+    else if(tipo==='no') btn.classList.add('no-sel');
+    else btn.classList.add('si-sel');
+    actualizarProgreso();
+  }
+
+  function actualizarProgreso(){
+    const textareas=document.querySelectorAll('textarea');
+    const inputs=document.querySelectorAll('input[type="text"], input[type="date"], select');
+    let rellenos=0, total=textareas.length+inputs.length;
+    textareas.forEach(t=>{ if(t.value.trim().length>2) rellenos++; });
+    inputs.forEach(i=>{ if(i.value.trim().length>0) rellenos++; });
+    const yn=document.querySelectorAll('.yn-group');
+    total+=yn.length;
+    yn.forEach(g=>{ if(g.querySelector('.si-sel, .no-sel')) rellenos++; });
+    const pct=Math.round((rellenos/total)*100);
+    document.getElementById('barra').style.width=pct+'%';
+    document.getElementById('pct-txt').textContent=pct+' %';
+  }
+
+  function mostrarToast(msg, esError=false){
+    const t=document.getElementById('toast');
+    t.textContent=msg;
+    t.style.background = esError ? '#b34444' : 'var(--verde-principal)';
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'), 3200);
+  }
+
+  function guardarLocal(){
+    try {
+      localStorage.setItem('bp_bartolome_flores', JSON.stringify(recogerDatosFormulario()));
+      mostrarToast('✓ Borrador guardado');
+    } catch(e){
+      mostrarToast('No disponible en este entorno', true);
+    }
+  }
+
+  function limpiarTodo(){
+    if(!confirm('¿Limpiar todos los campos?')) return;
+    document.querySelectorAll('input[type="text"],textarea').forEach(el=>el.value='');
+    document.querySelectorAll('select').forEach(el=>el.selectedIndex=0);
+    document.querySelectorAll('.yn-btn').forEach(b=>b.classList.remove('si-sel','no-sel'));
+    document.getElementById('d-fecha').valueAsDate=new Date();
+    actualizarProgreso();
+    mostrarToast('Formulario limpiado');
+  }
+
+  function textoLimpio(txt){
+    return (txt || '').replace(/\s+/g,' ').trim();
+  }
+
+  function valorYN(grupo){
+    const btn = grupo.querySelector('.si-sel, .no-sel');
+    return btn ? textoLimpio(btn.textContent) : '';
+  }
+
+  function recogerDatosFormulario(){
+    const inputs = Array.from(document.querySelectorAll('.card:first-of-type input, .card:first-of-type select'));
+    const metadatos = {
+      centro: inputs[0]?.value?.trim() || '',
+      localidad: inputs[1]?.value?.trim() || '',
+      curso_escolar: inputs[2]?.value?.trim() || '',
+      docente_responsables: inputs[3]?.value?.trim() || '',
+      etapa_nivel: inputs[4]?.value?.trim() || '',
+      fecha_formulario: inputs[5]?.value?.trim() || '',
+      titulo_buena_practica: inputs[6]?.value?.trim() || '',
+      ambito_principal: inputs[7]?.value?.trim() || ''
+    };
+
+    const respuestas = [];
+    document.querySelectorAll('.dimension-bloque').forEach((bloque, index) => {
+      const seccion = textoLimpio(bloque.querySelector('h4')?.textContent || `Sección ${index+1}`);
+      bloque.querySelectorAll('.pregunta').forEach((pregunta) => {
+        const enunciado = textoLimpio(pregunta.querySelector('.preg-label')?.textContent || '');
+        const yn = pregunta.querySelector('.yn-group');
+        const texto = pregunta.querySelector('textarea');
+        if(yn){
+          respuestas.push({ seccion, pregunta: enunciado + ' [selección]', valor: valorYN(yn), tipo: 'seleccion' });
+        }
+        if(texto){
+          respuestas.push({ seccion, pregunta: enunciado + (yn ? ' [detalle]' : ''), valor: texto.value.trim(), tipo: 'texto' });
+        }
+      });
+    });
+
+    const selectsFinales = document.querySelectorAll('.card:last-of-type select');
+    const observacionesFinales = document.querySelector('.card:last-of-type textarea');
+    respuestas.push({ seccion: 'Valoración global', pregunta: 'Grado global de interés como buena práctica de centro', valor: selectsFinales[0]?.value?.trim() || '', tipo: 'seleccion' });
+    respuestas.push({ seccion: 'Valoración global', pregunta: 'Prioridad de difusión interna', valor: selectsFinales[1]?.value?.trim() || '', tipo: 'seleccion' });
+    respuestas.push({ seccion: 'Valoración global', pregunta: 'Observaciones finales', valor: observacionesFinales?.value?.trim() || '', tipo: 'texto' });
+
+    return {
+      formulario: 'Buenas Prácticas Docentes – CEIP Bartolomé Flores',
+      objetivo: 'Objetivo 2 del Proyecto de Dirección',
+      enviadoEn: new Date().toISOString(),
+      urlOrigen: window.location.href,
+      metadatos,
+      respuestas
+    };
+  }
+
+  async function enviarFormulario(){
+    if(APP_SCRIPT_URL.includes('PEGA_AQUI')){
+      mostrarToast('Falta pegar la URL del Web App de Google Apps Script.', true);
+      return;
+    }
+
+    const boton = document.querySelector('.btn-ocre');
+    const textoOriginal = boton.innerHTML;
+    boton.disabled = true;
+    boton.style.opacity = '0.7';
+    boton.innerHTML = 'Enviando...';
+
+    try {
+      const payload = recogerDatosFormulario();
+      const respuesta = await fetch(APP_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await respuesta.json().catch(() => ({}));
+      if(!respuesta.ok || data.result !== 'success') {
+        throw new Error(data.message || 'No se pudo registrar la ficha.');
+      }
+
+      localStorage.setItem('bp_bartolome_flores', JSON.stringify(payload));
+      mostrarToast('✓ Ficha registrada en la base de datos');
+    } catch(error){
+      console.error(error);
+      mostrarToast('Error al registrar la ficha. Revisa la URL del script y el despliegue.', true);
+    } finally {
+      boton.disabled = false;
+      boton.style.opacity = '1';
+      boton.innerHTML = textoOriginal;
+    }
+  }
+
+  try {
+    const saved=localStorage.getItem('bp_bartolome_flores');
+    if(saved){
+      const datos=JSON.parse(saved);
+      if(!datos.metadatos){
+        document.querySelectorAll('input,select,textarea').forEach((el,i)=>{ if(datos['campo_'+i]!==undefined) el.value=datos['campo_'+i]; });
+      }
+    }
+  } catch(e) {}
+
+  actualizarProgreso();
+</script>
+
+</body>
+</html>
