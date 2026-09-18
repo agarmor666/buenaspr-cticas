@@ -18,7 +18,11 @@ body{font-family:'Lato',sans-serif;background:var(--gris-fondo);color:var(--text
 .cab-titulo{flex:1}
 .cab-titulo h1{font-size:1.16rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;line-height:1.2}
 .cab-titulo p{font-size:.81rem;color:rgba(255,255,255,.78);margin-top:2px;letter-spacing:.05em;text-transform:uppercase}
-.cab-curso{font-size:.78rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);padding:5px 14px;border-radius:20px;white-space:nowrap}.btn-inicio{display:inline-flex;align-items:center;gap:6px;color:#fff;text-decoration:none;font-size:.78rem;font-weight:900;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.34);padding:7px 13px;border-radius:20px;white-space:nowrap;transition:background .2s,transform .2s}.btn-inicio:hover{background:rgba(255,255,255,.27);transform:translateY(-1px)}
+.cab-curso{font-size:.78rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);padding:5px 14px;border-radius:20px;white-space:nowrap}
+.btn-inicio{display:inline-flex;align-items:center;gap:6px;color:#fff;text-decoration:none;font-size:.8rem;font-weight:900;background:var(--ocre);border:2px solid #a96f18;padding:8px 14px;border-radius:9px;white-space:nowrap;box-shadow:0 2px 7px rgba(31,42,36,.18);transition:background .2s,transform .2s}
+.btn-inicio:hover{background:#a7701f;transform:translateY(-1px)}
+.destino-registro{margin-top:14px;padding:11px 13px;border-left:4px solid var(--verde-principal);background:var(--verde-claro);border-radius:6px;color:var(--texto);font-size:.86rem;line-height:1.45}
+.destino-registro a{color:var(--verde-principal);font-weight:900}
 .contenido{max-width:980px;margin:30px auto;padding:0 20px 60px}
 .seccion-titulo{display:flex;align-items:center;gap:14px;margin-bottom:24px}
 .icono{width:46px;height:46px;border-radius:10px;background:var(--verde-principal);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.2rem;flex-shrink:0}
@@ -67,12 +71,13 @@ body{font-family:'Lato',sans-serif;background:var(--gris-fondo);color:var(--text
     <div class="cab-logo">BF</div>
     <div class="cab-titulo"><h1>CEIP Bartolomé Flores</h1><p>Mojácar · Buenas Prácticas Docentes</p></div>
     <span class="cab-curso">Curso 2026–2027</span>
-    <a class="btn-inicio" href="https://agarmor666.github.io/Horarios-26-27/" aria-label="Volver al portal principal">🏠 Inicio</a>
   </div>
 </header>
 <div class="contenido">
   <div class="seccion-titulo" style="margin-top:8px;">
-    <div class="icono">&#9733;</div><div><h2>Detección y resumen de buenas prácticas</h2></div>
+    <div class="icono">&#9733;</div>
+    <a class="btn-inicio" href="https://agarmor666.github.io/Horarios-26-27/" aria-label="Volver al portal principal">🏠 Inicio</a>
+    <div><h2>Detección y resumen de buenas prácticas</h2></div>
   </div>
   <div class="tabs">
     <button class="tab-btn activo" data-tab="deteccion">Detección de buenas prácticas</button>
@@ -82,7 +87,9 @@ body{font-family:'Lato',sans-serif;background:var(--gris-fondo);color:var(--text
   <section id="tab-deteccion" class="tab-panel activo">
     <div class="card">
       <div class="card-header"><span class="tag">Objetivo</span><h3>Formulario breve para detectar una buena práctica</h3></div>
-      <p class="ayuda">Este formulario está pensado para que cualquier docente pueda comunicar de forma rápida una práctica que le está funcionando bien y que podría servir a otros compañeros del centro.</p><p class="ayuda" style="margin-top:10px;"><span style="color:#b34444;font-weight:900">*</span> Indica los apartados de cumplimentación obligatoria.</p>
+      <p class="ayuda">Este formulario está pensado para que cualquier docente pueda comunicar de forma rápida una práctica que le está funcionando bien y que podría servir a otros compañeros del centro.</p>
+      <p class="ayuda" style="margin-top:10px;"><span style="color:#b34444;font-weight:900">*</span> Indica los apartados de cumplimentación obligatoria.</p>
+      <p class="destino-registro">📊 <strong>Destino de las respuestas:</strong> pestaña <strong>Detecciones_BP_2026</strong> de la <a href="https://docs.google.com/spreadsheets/d/1tkZDLM4Rwirt1bWxcO-zQeEan9Hrr7Hd2VniGs2LPRM/edit" target="_blank" rel="noopener">hoja de cálculo de Buenas Prácticas</a>.</p>
     </div>
 
     <div class="card">
@@ -160,7 +167,6 @@ body{font-family:'Lato',sans-serif;background:var(--gris-fondo);color:var(--text
 
     <div class="acciones">
       <button class="btn btn-secondary" onclick="limpiarFormulario()">Limpiar formulario</button>
-      <button class="btn btn-secondary" onclick="guardarLocal()">Guardar borrador</button>
       <button class="btn btn-ocre" onclick="enviarDeteccion()">Enviar propuesta</button>
     </div>
   </section>
@@ -270,7 +276,6 @@ function recogerDeteccion(){
     urlOrigen:window.location.href
   };
 }
-function guardarLocal(){ try{ localStorage.setItem('bp_bf_deteccion', JSON.stringify(recogerDeteccion())); mostrarToast('✓ Borrador guardado'); }catch(e){ mostrarToast('No se pudo guardar el borrador', true);} }
 function limpiarFormulario(sinConfirmacion = false){
   if(!sinConfirmacion && !confirm('¿Limpiar todos los campos?')) return;
   document.querySelectorAll('#tab-deteccion input[type="text"], #tab-deteccion textarea').forEach(el=>el.value='');
@@ -282,7 +287,6 @@ function limpiarFormulario(sinConfirmacion = false){
   document.getElementById('f-curso-manual').value='';
   document.getElementById('f-fecha').valueAsDate=new Date();
   actualizarCampoDocenteManual();
-actualizarCampoCursoManual();
   actualizarCampoCursoManual();
   if(!sinConfirmacion) mostrarToast('Formulario limpiado');
 }
@@ -296,7 +300,7 @@ async function enviarDeteccion(){
     const respuesta = await fetch(APP_SCRIPT_URL,{method:'POST', redirect:'follow', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload)});
     const data = await respuesta.json().catch(()=>({}));
     if(!respuesta.ok || data.result !== 'success') throw new Error(data.message || 'No se pudo enviar.');
-    localStorage.setItem('bp_bf_deteccion', JSON.stringify(payload));
+    try{ localStorage.removeItem('bp_bf_deteccion'); }catch(e){}
     mostrarToast('✓ Propuesta registrada correctamente');
     setTimeout(()=>limpiarFormulario(true), 300);
   }catch(error){
@@ -367,50 +371,8 @@ function formatearSoloFecha(v){
   if(isNaN(f)) return String(v);
   return f.toLocaleDateString('es-ES');
 }
-try{
-  const saved=localStorage.getItem('bp_bf_deteccion');
-  if(saved){
-    const d=JSON.parse(saved);
-    if(d.docente){
-      const docenteSelect=document.getElementById('f-docente-select');
-      const opciones=Array.from(docenteSelect.options).map(o=>o.value);
-      if(opciones.includes(d.docente)) {
-        docenteSelect.value=d.docente || '';
-      } else if (d.docente) {
-        docenteSelect.value='__OTROS__';
-        document.getElementById('f-docente-manual').value=d.docente || '';
-      }
-    }
-    if(d.curso){
-      const cursoSelect = document.getElementById('f-curso-select');
-      const opcionesCurso = Array.from(cursoSelect.options).map(o=>o.value);
-      if(opcionesCurso.includes(d.curso)) {
-        cursoSelect.value = d.curso || '';
-      } else if (d.curso) {
-        cursoSelect.value = '__OTROS__';
-        document.getElementById('f-curso-manual').value = d.curso || '';
-      }
-    }
-    if(d.etapa) document.getElementById('f-etapa').value=d.etapa || '';
-    if(d.fecha) document.getElementById('f-fecha').value=d.fecha || '';
-    if(d.titulo) document.getElementById('f-titulo').value=d.titulo || '';
-    if(d.ambito) document.getElementById('f-ambito').value=d.ambito || '';
-    if(d.descripcion) document.getElementById('f-descripcion').value=d.descripcion || '';
-    if(d.funciona) document.getElementById('f-funciona').value=d.funciona || '';
-    if(d.transferencia) document.getElementById('f-transferencia').value=d.transferencia || '';
-    if(d.transferible) document.getElementById('f-transferible').value=d.transferible || '';
-    if(d.referenciaCentro) document.getElementById('f-referencia').value=d.referenciaCentro || '';
-    if(d.mejorasAlumnado) document.getElementById('f-mejoras').value=d.mejorasAlumnado || '';
-    if(d.gradoInteres) document.getElementById('f-grado').value=d.gradoInteres || '';
-    if(d.prioridadDifusion) document.getElementById('f-prioridad').value=d.prioridadDifusion || '';
-    if(d.observacionesFinales) document.getElementById('f-observaciones-finales').value=d.observacionesFinales || '';
-    (d.impactos || []).forEach(val=>{ const box=Array.from(document.querySelectorAll('.impacto')).find(x=>x.value===val); if(box) box.checked=true; });
-    actualizarCampoDocenteManual();
-actualizarCampoCursoManual();
-  }
-}catch(e){}
-actualizarCampoDocenteManual();
-actualizarCampoCursoManual();
+try{ localStorage.removeItem('bp_bf_deteccion'); }catch(e){}
+limpiarFormulario(true);
 </script>
 </body>
 </html>
