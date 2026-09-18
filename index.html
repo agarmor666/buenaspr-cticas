@@ -66,7 +66,7 @@ body{font-family:'Lato',sans-serif;background:var(--gris-fondo);color:var(--text
   <div class="cab-top">
     <div class="cab-logo">BF</div>
     <div class="cab-titulo"><h1>CEIP Bartolomé Flores</h1><p>Mojácar · Buenas Prácticas Docentes</p></div>
-    <span class="cab-curso">Curso 2025–2026</span>
+    <span class="cab-curso">Curso 2026–2027</span>
   </div>
 </header>
 <div class="contenido">
@@ -92,8 +92,8 @@ body{font-family:'Lato',sans-serif;background:var(--gris-fondo);color:var(--text
         <div class="campo">
           <label>Curso escolar</label>
           <select id="f-curso-select">
-            <option value="2025-2026" selected>2025-2026</option>
-            <option value="2026-2027">2026-2027</option>
+            <option value="2025-2026">2025-2026</option>
+            <option value="2026-2027" selected>2026-2027</option>
             <option value="2027-2028">2027-2028</option>
             <option value="2028-2029">2028-2029</option>
             <option value="__OTROS__">Otros</option>
@@ -277,7 +277,7 @@ function limpiarFormulario(sinConfirmacion = false){
   document.querySelectorAll('.impacto').forEach(el=>el.checked=false);
   document.getElementById('f-centro').value='CEIP Bartolomé Flores';
   document.getElementById('f-localidad').value='Mojácar';
-  document.getElementById('f-curso-select').value='2025-2026';
+  document.getElementById('f-curso-select').value='2026-2027';
   document.getElementById('f-curso-manual').value='';
   document.getElementById('f-fecha').valueAsDate=new Date();
   actualizarCampoDocenteManual();
